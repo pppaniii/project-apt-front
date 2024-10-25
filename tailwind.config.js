@@ -12,7 +12,7 @@ export default {
       },
       fontFamily: {
         sans: ['Montserrat', 'sans-serif'],
-        serif: ['Cinzel', 'serif'],
+        cinzel: ['Cinzel', 'serif'],
       },
       //this is animation class
       animation: {

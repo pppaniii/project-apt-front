@@ -4,25 +4,99 @@ import { RouterLink } from 'vue-router';
 
 const props = defineProps<{
     medal: Medal
+    order: number;
 }>()
+
 </script>
 
 <template>
-    <RouterLink class="no-underline" :to="{ name: 'country-detail', params: { id: props.medal.id } }">
-        <div class="w-[95%] max-w-[95%] p-2.5 cursor-pointer mx-auto border border-black rounded-lg mb-4 bg-[#FFFFFF] flex flex-col items-center gap-2 hover:bg-[#D1E9F6]
-                    md:w-[800px] md:flex-row md:justify-between md:p-2.5">
-            <div class="w-full flex justify-center gap-3 md:w-1/5 md:gap-0">
-                <img :src="medal.flag_url" alt="Country flag" class="max-w-[30%] h-auto border border-[#bbbbbb] md:max-w-[80px] md:ml-8" />
+    <RouterLink class="Card" :to="{ name: 'country-detail', params: { id: props.medal.id } }">
+        <div class="card-container">
+            <div class="card-order">{{ props.order }}</div>
+            <div class="card-contryname">
+                <img :src="medal.flag_url" alt="Country flag" class="flag-img"/>
+                <p>{{ props.medal.name }}</p>
             </div>
-            <div class="w-full text-[#B1AFFF] text-[20px] font-black text-center mt-2 md:text-2xl md:mt-0 md:mx-4">
-                {{ props.medal.name }}
-            </div>
-            <div class="w-full flex items-center gap-1 text-[#B1AFFF] text-[18px] font-medium justify-center 
-                        md:w-1/3 md:gap-4 md:text-xl md:mr-6">
+            <div class="number-of-medal">
                 <p>{{ props.medal.gold_medals }}</p>
                 <p>{{ props.medal.silver_medals }}</p>
                 <p>{{ props.medal.bronze_medals }}</p>
+                <p>{{ props.medal.total_medals }}</p>
             </div>
         </div>
     </RouterLink>
 </template>
+
+<style>
+
+.card-container {
+    background-color: #fff;
+    width: 800px;
+    height: 80px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.card-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-order {
+    flex: 0 0 100px;
+    text-align: center;
+}
+
+.card-contryname {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-left: 10px;
+}
+
+.flag-img {
+    width: 80px;
+    height: auto;
+    border: 1px solid #c4c4c4;
+}
+
+.number-of-medal {
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    padding: 10px; 
+    margin-bottom: 10px;
+    max-width: 100%; 
+  }
+
+  .card-order {
+    flex: 0 0 40px; 
+    font-size: 14px; 
+  }
+
+  .card-contryname {
+    gap: 8px;
+  }
+
+  .flag-img {
+    width: 30px; 
+  }
+
+  .number-of-medal {
+    width: 120px; 
+    font-size: 14px;
+  }
+}
+
+</style>
